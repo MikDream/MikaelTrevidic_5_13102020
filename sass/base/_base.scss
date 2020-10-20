@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: $text-font-family;
+}
+.main-block{
+    width: 100%;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: $title-font-family;
+}
+h1{
+    font-size: 1.72rem;
+    @include xlarge-size{
+        font-size: 1.82rem;
+    }
+    @include xxlarge-size{
+        font-size: 1.92rem;
+    }
+}
+h2{
+    font-size: 1.3rem;
+    @include xlarge-size{
+        font-size: 1.5rem;
+    }
+    @include xxlarge-size{
+        font-size: 1.7rem;
+    }
+}
+h3{
+    font-size: 1.2rem;
+    @include xlarge-size{
+        font-size: 1.4rem;
+    }
+    @include xxlarge-size{
+        font-size: 1.6rem;
+    }
+}
+h4{
+    font-size: 1.1rem;
+    @include xlarge-size{
+        font-size: 1.3rem;
+    }
+    @include xxlarge-size{
+        font-size: 1.5rem;
+    }
+}
+h5{
+    font-size: 1rem;
+    @include xlarge-size{
+        font-size: 1.2rem;
+    }
+    @include xxlarge-size{
+        font-size: 1.4rem;
+    }
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+li{
+    list-style: none;
+}

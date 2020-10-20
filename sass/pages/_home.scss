@@ -1,0 +1,44 @@
+.aLaUne{
+    text-align: center;
+    padding: 40px 0;
+    & img{
+        width: 100%;
+        margin-top: 40px;
+    }
+}
+.all-products{
+    h2{
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 10px;
+    }
+    padding-bottom: 40px;
+    &__category{
+        padding: 20px 0 0 0;
+        background-color: $secondary-color;
+    }
+    &--background{
+        display: flex;
+        background-color: $tertiary-color;
+        button{
+            @include button-category;
+            box-shadow: 3px 3px 10px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover{
+            cursor: pointer;
+        }
+        button:disabled{
+            cursor: not-allowed;
+            background-color: #8f5bfe71;
+            color:rgba(255, 255, 255, 0.39);
+            box-shadow: none;
+        }
+    }
+    &__list{
+        margin-top: 20px;
+        padding-left: 20%;
+        li{
+            padding: 10px 0;
+        }
+    }
+}

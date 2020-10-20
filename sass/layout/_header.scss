@@ -1,0 +1,24 @@
+.header{
+    background-color: lighten($color: $secondary-color, $amount: 37%);
+    &__logo{
+        width: 100%;
+        box-shadow: $shadow;
+        position: relative;
+    }
+    &__nav{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 9% 0;
+        font-weight: bold;
+        font-size: 1.1rem;
+        a{
+            padding-bottom: 12px;
+        }
+        a:hover{
+            color: $primary-color;
+            padding-bottom: 10px;
+            border-bottom: 2px solid $secondary-color;
+        }
+    }
+}
