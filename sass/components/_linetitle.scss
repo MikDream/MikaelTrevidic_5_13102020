@@ -1,0 +1,13 @@
+.hr-top{
+    border: 0;
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient(to right,#cf7e48, #cf7e48c2, #cf7e4800);
+}
+.hr-bottom{
+    border: 0;
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient(to left,#cf7e48, #cf7e48c2, #cf7e4800);
+    margin-bottom: 20px;
+}

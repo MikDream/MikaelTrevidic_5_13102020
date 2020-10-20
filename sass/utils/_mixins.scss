@@ -26,9 +26,15 @@
 }
 /*END MEDIA QUERIES*/
 @mixin button-category{
-    font-size: 1rem;
+    font-size: 1.1rem;
     border: none;
     padding: 10px 20px;
     background-color:  #8f5bfe;
     color: white;
+}
+@mixin h2-title{
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: darken($color:#f6f6f6, $amount: 1%);
 }

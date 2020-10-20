@@ -1,0 +1,15 @@
+.footer{
+    color: white;
+    background-color: darken($color:#f6f6f6, $amount: 75.7%);
+    text-align: center;
+    & h5{
+        padding-bottom: 10px;
+        padding-top: 20px;
+    }
+    &__nav li{
+        padding-bottom: 10px;
+    }
+    & a{
+        color: white;
+    }
+}

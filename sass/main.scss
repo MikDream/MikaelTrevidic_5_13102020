@@ -1,16 +1,11 @@
 @import 'utils/variables';
 @import 'utils/mixins';
-// @import 'utils/animations';
 
 @import 'base/base';
 
 @import 'layout/header';
-// @import 'layout/footer';
+@import 'layout/footer';
 
-// @import 'components/buttons';
-// @import 'components/cards';
-// @import 'components/separateur';
-// @import 'components/loader';
+@import 'components/linetitle';
 
 @import 'pages/home';
-// @import 'pages/menus';
