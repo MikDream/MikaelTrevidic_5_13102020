@@ -7,40 +7,22 @@
     <script src="https://kit.fontawesome.com/27350ed8ab.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fondamento&family=Merienda+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
-    
+    <script src="product.js"></script>
 </head>
 <body>
     <main class="main-block">
         <header class="header">
             <img class="header__logo" src="./public/images/logo_orinoco.png" alt="Logo Orinoco">
             <nav class="header__nav">
-                <a href="#">Accueil</a>
-                <a href="#products-list">Tous nos produits</a>
+                <a href="index.html">Accueil</a>
+                <a href="index.html#products-list">Tous nos produits</a>
                 <a href="#"><i class="fas fa-shopping-cart"></i> Panier</a>
             </nav>
         </header>
-        <section class="aLaUne">
-            <hr class="hr-top">
-            <h2>Produits à la une</h2>
-            <hr class="hr-bottom">
-            <div class="aLaUne__image">
-                <img id="imgAlaUne" src='' alt=''/>
-            </div>
-        </section>
-        <section class="all-products">
-            <hr class="hr-top">
-            <h2>Tous nos produits</h2>
-            <hr class="hr-bottom">
-            <div class="all-products__category">
-                <div class="all-products--background">
-                    <button>Ours</button>
-                    <button disabled>Appareils photo</button>
-                    <button disabled>Meubles</button>
-                </div>
-            </div>
-            <div class="all-products__list">
-                <ul id="products-list"></ul>  
-            </div>
+        <section class="product">
+            <div id="name"></div>
+            <img id="img" src="">
+            <p id="description"></p>
         </section>
         <footer class="footer">
             <h5>Orinoco</h5>
@@ -52,6 +34,5 @@
             </nav>
         </footer>
     </main>
-    <script src="product.js"></script>
 </body>
 </html>
