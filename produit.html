@@ -7,7 +7,6 @@
     <script src="https://kit.fontawesome.com/27350ed8ab.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fondamento&family=Merienda+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
-    <script src="product.js"></script>
 </head>
 <body>
     <main class="main-block">
@@ -20,9 +19,12 @@
             </nav>
         </header>
         <section class="product">
-            <div id="name"></div>
-            <img id="img" src="">
-            <p id="description"></p>
+            <img src="">
+            <h1></h1>
+            <p class="descriptionProduit"></p>
+            <label for="colors-select">Choisissez une couleur :</label>
+            <select name="colors" id="colors-select"></select>
+            <p class="prixProduit">Prix : </p>
         </section>
         <footer class="footer">
             <h5>Orinoco</h5>
@@ -34,5 +36,7 @@
             </nav>
         </footer>
     </main>
+    <script src="get_products.js"></script>
+    <script src="product.js"></script>
 </body>
 </html>

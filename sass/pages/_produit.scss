@@ -1,0 +1,16 @@
+.product{
+    & img{
+        width: 100%;
+    }
+    & h1{
+        text-align: center;
+    }
+    & p{
+        margin: 20px 0;
+        padding: 0 20px;
+        font-weight: bold;
+    }
+    .prixProduit{
+        text-align: end;
+    }
+}

@@ -1,53 +1,30 @@
-let get = function(url){
-    return new Promise(function(resolve, reject){
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = function(){
-            if(request.readyState === 4){
-                if(request.status === 200)
-                    resolve(request.responseText);
-                else
-                    reject(request);        
+var urlProduit = new URL(window.location.href);
+urlProduit = (urlProduit.searchParams.get("id"));
+let products = function(produits){
+    let i = 0;
+    let x = 0;
+    let lenghtArrayProduit = produits.length;
+    while(i < lenghtArrayProduit ){
+        if((produits[i]._id) == urlProduit){
+            let imageProduit = document.querySelector('.product > img');
+            imageProduit.src = produits[i].imageUrl;
+            let nomProduit = document.querySelector('.product > h1');
+            nomProduit.textContent = produits[i].name;
+            let descriptionProduit = document.querySelector('.descriptionProduit');
+            descriptionProduit.textContent = produits[i].description;
+            let prixProduit = document.querySelector('.prixProduit');
+            prixProduit.insertAdjacentText('beforeend', produits[i].price);
+            let lenghtArrayColor = produits[i].colors.length;
+            while(x < lenghtArrayColor){
+                let select = document.querySelector('#colors-select');
+                let option = document.createElement('option');
+                option.innerText = produits[i].colors[x];
+                select.appendChild(option);
+                x++;
             };
+            break;
         };
-        request.open('GET', url, true);
-        request.send();
-    });
-};
-let catchError = function(error){
-    console.error('Erreur AJAX', error);
+        i++; 
+    };
 };
 
-const urlPage = window.location.href;
-if(urlPage === "file:///C:/Users/mikae/Desktop/Formation%20OC/Git/MikaelTrevidic_5_13102020/produit.html?5be9c8541c9d440000665243"){
-    let products = function(){
-        get('http://localhost:3000/api/teddies').then(function(response){
-            let produits = JSON.parse(response);
-            let descriptionProduit = document.querySelector('#description');
-            descriptionProduit.innerHTML = produits[0].name + "<br>" + produits[0]._id;
-        }).catch(catchError);
-    };
-    products();
-}else{
-    let productsImage = function(){
-        get('http://localhost:3000/api/teddies').then(function(response){
-            let produits = JSON.parse(response);
-            let imageProduit = document.querySelector('#imgAlaUne');
-            imageProduit.src = produits[3].imageUrl;
-        }).catch(catchError);
-    };
-    let productsName = function(){
-        get('http://localhost:3000/api/teddies').then(function(response){
-            let produits = JSON.parse(response);
-            let lenghtArray = produits.length;
-            let blocNomsProduits = document.querySelector('#products-list');
-            let names;
-            for(let i = 0; i < lenghtArray; i++){
-                names = document.createElement('li');
-                names.innerHTML = "<a href='produit.html?"+produits[i]._id+"'>"+produits[i].name+"</a>";
-                blocNomsProduits.appendChild(names);
-            };
-        }).catch(catchError);
-    };
-    productsImage();
-    productsName();
- };
