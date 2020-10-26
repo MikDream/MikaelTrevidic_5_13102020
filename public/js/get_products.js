@@ -21,28 +21,29 @@ let catchError = function(error){
 // Appel de la fonction get
 get('http://localhost:3000/api/teddies').then(function(response){
     let produits = JSON.parse(response);
-    var urlPage = new URL(document.location.href);
-    urlPage = (urlPage.searchParams.get("id"));
-    var pathArray = window.location.pathname.split( "/" );
-    var lastPath = pathArray[pathArray.length - 1];
-    switch(urlPage){                    // Va permettre d'appeler les fonctions soit sur index.html soit sur produit.html
-        case null:
-            if(lastPath == 'index.html'){
-                productsImage(produits);
-                productsName(produits);
-            }else{
-                pathArray.pop();
-                pathArray.push('index.html');
+    var pathUrlArray = window.location.pathname.split( "/" );
+    var pageUrl = pathUrlArray[pathUrlArray.length - 1];
+    switch(pageUrl){                    // Va permettre d'appeler les fonctions soit sur index.html soit sur produit.html
+        case 'index.html':
+            productsImage(produits);
+            productsName(produits);
+            break;
+        case 'produit.html':
+            var urlPage = new URL(document.location.href);
+            urlPage = (urlPage.searchParams.get("id"));
+            if(urlPage == null){
+                pathUrlArray.pop();
+                pathUrlArray.push('index.html');
                 var redirectPath = "";
-                for(i=0; i<pathArray.length; i++){
+                for(i=0; i<pathUrlArray.length; i++){
                     redirectPath += "/";
-                    redirectPath += pathArray[i];
+                    redirectPath += pathUrlArray[i];
                 }
                 window.location.pathname=redirectPath;
-            }
+            }else
+                products(produits);
             break;
-        case urlPage:
-            products(produits);
+        case 'panier.html':
             break;
-    }
+    };
 }).catch(catchError);
