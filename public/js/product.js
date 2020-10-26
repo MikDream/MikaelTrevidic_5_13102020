@@ -1,5 +1,6 @@
 var urlProduit = new URL(window.location.href);
 urlProduit = (urlProduit.searchParams.get("id"));
+// Création du bloc individuel des produits en fonction de l'_id
 let products = function(produits){
     let i = 0;
     let x = 0;
