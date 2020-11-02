@@ -3,6 +3,9 @@
     h2{
         @include h2-title;
     }
+    h3{
+        text-align: center;
+    }
     & img{
         width: 100%;
         margin-top: 20px;
@@ -39,10 +42,30 @@
     }
     &__list{
         margin-top: 20px;
-        padding-left: 20%;
         font-weight: bold;
-        li{
-            padding: 10px 0;
+        padding: 0 20px;
+        #products-list{
+            img{
+                width: 150px;
+            }
+            .products-list__card{
+                display: flex;
+                margin-bottom: 20px;
+                padding: 5px;
+                background-color: $background-light;
+                box-shadow: $shadow;
+                cursor: pointer;
+                &:hover{
+                    box-shadow: none;
+                }
+            }
+            .card--text{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                margin: 0 auto;
+                text-align: center;
+            }
         }
     }
 }
