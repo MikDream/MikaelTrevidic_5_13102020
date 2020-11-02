@@ -1,8 +1,16 @@
-let productsImage = function(produits){
+get('http://localhost:3000/api/teddies').then(function(response){
+    let produits = JSON.parse(response);
+    productsFirst(produits);
+    productsInfos(produits);
+    compteurPanier();
+}).catch(catchError);
+let productsFirst = function(produit){
     let imageProduit = document.querySelector('#imgAlaUne');
-    imageProduit.src = produits[3].imageUrl;
+    imageProduit.src = produit[3].imageUrl;
+    let nomProduit = document.querySelector(".aLaUne__image > h3");
+    nomProduit.textContent = produit[3].name;
 };
-let productsName = function(produits){
+let productsInfos = function(produits){
     let lenghtArrayProduit = produits.length;
     let blocNomsProduits = document.querySelector('#products-list');
     let names;

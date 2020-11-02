@@ -15,7 +15,7 @@
             <nav class="header__nav">
                 <a href="index.html">Accueil</a>
                 <a href="index.html#products-list">Tous nos produits</a>
-                <a href="panier.html"><i class="fas fa-shopping-cart"></i> Panier</a>
+                <a class="compteurPanier" href="panier.html"><i class="fas fa-shopping-cart"></i><span></span></a>
             </nav>
         </header>
         <section class="product">
@@ -25,7 +25,11 @@
             <label for="colors-select">Choisissez une couleur :</label>
             <select name="colors" id="colors-select"></select>
             <p class="prixProduit">Prix : </p>
+            <button id="lessArticle">-</button>
+            <input id="numberOfArticle" type="number" value="1">
+            <button id="moreArticle">+</button>
             <input id="addCart" type="button" value="Ajouter au panier">
+            
         </section>
         <footer class="footer">
             <h5>Orinoco</h5>
@@ -39,6 +43,5 @@
     </main>
     <script src="./public/js/get_products.js"></script>
     <script src="./public/js/product.js"></script>
-    <!-- <script src="./public/js/panier.js"></script> -->
 </body>
 </html>

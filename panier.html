@@ -15,13 +15,12 @@
             <nav class="header__nav">
                 <a href="index.html">Accueil</a>
                 <a href="index.html#products-list">Tous nos produits</a>
-                <a href="panier.html"><i class="fas fa-shopping-cart"></i> Panier</a>
+                <a class="compteurPanier" href="panier.html"><i class="fas fa-shopping-cart"></i><span></span></a>
             </nav>
         </header>
         <section class="panier">
-            <ul>
-                
-            </ul>
+            <ul></ul>
+            <input id="emptyCart" type="button" value="Vider le panier">
         </section>
         <footer class="footer">
             <h5>Orinoco</h5>
@@ -34,7 +33,6 @@
         </footer>
     </main>
     <script src="./public/js/get_products.js"></script>
-    <script src="./public/js/product.js"></script>
     <script src="./public/js/panier.js"></script>
 </body>
 </html>

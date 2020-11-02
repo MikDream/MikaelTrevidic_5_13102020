@@ -18,32 +18,9 @@ let get = function(url){
 let catchError = function(error){
     console.error('Erreur AJAX', error);
 };
-// Appel de la fonction get
-get('http://localhost:3000/api/teddies').then(function(response){
-    let produits = JSON.parse(response);
-    var pathUrlArray = window.location.pathname.split( "/" );
-    var pageUrl = pathUrlArray[pathUrlArray.length - 1];
-    switch(pageUrl){                    // Va permettre d'appeler les fonctions soit sur index.html soit sur produit.html
-        case 'index.html':
-            productsImage(produits);
-            productsName(produits);
-            break;
-        case 'produit.html':
-            var urlPage = new URL(document.location.href);
-            urlPage = (urlPage.searchParams.get("id"));
-            if(urlPage == null){
-                pathUrlArray.pop();
-                pathUrlArray.push('index.html');
-                var redirectPath = "";
-                for(i=0; i<pathUrlArray.length; i++){
-                    redirectPath += "/";
-                    redirectPath += pathUrlArray[i];
-                }
-                window.location.pathname=redirectPath;
-            }else
-                products(produits);
-            break;
-        case 'panier.html':
-            break;
-    };
-}).catch(catchError);
+let compteurPanier = function(){
+    let compteur = localStorage.getItem("number");
+    if(compteur == null)
+        compteur = 0;
+    document.querySelector(".compteurPanier > span").textContent =  " Panier ("+compteur+")";
+};
