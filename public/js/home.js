@@ -22,10 +22,10 @@ let createCard = function(produit, i, blocParent){
     let name = document.createElement('h3');
     let price = document.createElement('p');
     link.setAttribute('href', 'produit.html?id='+produit[i]._id);
-    card.setAttribute('class', 'products-list__card');
+    card.setAttribute('class', 'card');
     image.setAttribute('src', produit[i].imageUrl);
     image.setAttribute('alt', 'image de '+produit[i].name);
-    text.setAttribute('class', 'card--text');
+    text.setAttribute('class', 'card__text');
     name.textContent = produit[i].name;
     price.textContent = 'Prix : '+produit[i].price+'€';
     text.append(name, price);

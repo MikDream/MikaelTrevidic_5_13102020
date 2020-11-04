@@ -32,8 +32,8 @@ let afficherProduit = function(produit){
     nomProduit.textContent = produit.name;                  //Création h1
     let descriptionProduit = document.querySelector('.descriptionProduit');
     descriptionProduit.textContent = produit.description;  //Création description
-    let prixProduit = document.querySelector('.prixProduit');
-    prixProduit.insertAdjacentText('beforeend', produit.price);//Création prix
+    let prixProduit = document.querySelector('.product--price');
+    prixProduit.insertAdjacentText('beforeend', produit.price+'€');//Création prix
     produit.colors.forEach(color => {
         var select = document.querySelector('#colors-select');
         var option = document.createElement('option');
@@ -67,7 +67,8 @@ let addCart = function(article){
                 'nom': article.name,
                 'prix': article.price,
                 'id': article._id,
-                'quantite': 1
+                'quantite': 1,
+                'image': article.imageUrl
             };
             if(cartArray_json == null){
                 cartArray.push(articleInfo);

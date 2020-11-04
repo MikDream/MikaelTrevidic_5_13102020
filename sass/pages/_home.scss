@@ -41,30 +41,26 @@
         }
     }
     &__list{
-        margin-top: 20px;
+        margin-top: 30px;
         font-weight: bold;
         padding: 0 20px;
         #products-list{
-            img{
-                width: 150px;
-            }
-            .products-list__card{
-                display: flex;
-                margin-bottom: 20px;
-                padding: 5px;
-                background-color: $background-light;
+            text-align: center;
+            .card{
                 box-shadow: $shadow;
-                cursor: pointer;
+                padding: 0;
+                &__text{
+                    margin: auto;
+                }
+                img{
+                    width: 45%;
+                    height: 100%;
+                    margin: 0;
+                }
                 &:hover{
+                    cursor: pointer;
                     box-shadow: none;
                 }
-            }
-            .card--text{
-                display: flex;
-                flex-direction: column;
-                justify-content: space-evenly;
-                margin: 0 auto;
-                text-align: center;
             }
         }
     }

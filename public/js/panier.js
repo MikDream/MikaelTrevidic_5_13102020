@@ -22,16 +22,31 @@ let sameArticle = function(array){
     };
 };
 let vueCart = function(cart){
+    let x = 0;
     for(let i=0; i<cart.length; i++){
-        let ul = document.querySelector('.panier > ul');
-        var article = document.createElement('li');
-        article.setAttribute("id", "articlePanier"+i);
-        article.innerHTML = (i+1)+" : "+cart[i].nom+" -- X"+cart[i].quantite+" : "+(cart[i].prix*cart[i].quantite)+"€ ";
-        ul.appendChild(article);
-        let supress = document.createElement('input');
-        supress.setAttribute("type", "button");
-        supress.setAttribute("value", "Retirer");
-        article.appendChild(supress);
+        let cartBlock = document.querySelector('.panier');
+        let article = document.createElement('div');
+        let img = document.createElement('img');
+        let text = document.createElement('div');
+        let nomArticle = document.createElement('h3');
+        let quantite = document.createElement('p');
+        let prix = document.createElement('p');
+        let prixTotal = document.createElement('p');
+        article.setAttribute("class", "card");
+        if (x == i) {
+            article.setAttribute("class", "card backgroundAlt");
+            x+=2;
+        };
+        img.setAttribute("src", cart[i].image)
+        img.setAttribute("alt", "image de "+cart[i].nom);
+        text.setAttribute("class", "card__text");
+        nomArticle.textContent = cart[i].nom;
+        quantite.textContent = "Quantité : "+cart[i].quantite;
+        prix.textContent = "Prix unitaire : "+cart[i].prix+"€";
+        prixTotal.textContent = "Prix total : "+(cart[i].prix*cart[i].quantite)+"€";
+        text.append(nomArticle, quantite, prix, prixTotal);
+        article.append(img, text);
+        cartBlock.appendChild(article);
     };
 };
 let getCart = function(){
@@ -40,25 +55,34 @@ let getCart = function(){
     if(cartArray_json == null){
         let emptyMessage = document.querySelector('.panier');
         let message = document.createElement('p');
+        message.setAttribute('class', 'subTextCart')
         message.innerHTML = "VOTRE PANIER EST VIDE<br><a href='index.html'>Tous les produits</a>";
-        emptyMessage.prepend(message);
+        emptyMessage.appendChild(message);
     }else{
         cartArray = JSON.parse(cartArray_json);
-        console.log(cartArray);
         let numArticle = document.createElement('p');
+        numArticle.setAttribute('class', 'subTextCart');
         numArticle.textContent = "Vous avez "+cartArray.length+" articles dans votre panier.";
         sameArticle(cartArray);
         let cartMessage = document.querySelector('.panier');
-        cartMessage.prepend(numArticle);
-        console.log(cartArray);
+        cartMessage.appendChild(numArticle);
         vueCart(cartArray);
+        emptyCart();
+        console.log(cartArray[0]);
+        
     };
 };
 let emptyCart = function(){
+    let parentBlock = document.querySelector('.panier');
+    let supressAll = document.createElement('input');
+    supressAll.setAttribute('id', 'emptyCart');
+    supressAll.setAttribute('class', 'button');
+    supressAll.setAttribute('type', 'button');
+    supressAll.setAttribute('value', 'Vider le panier');
+    parentBlock.appendChild(supressAll);
     document.querySelector('#emptyCart').addEventListener('click', function(){
         localStorage.clear();
         location.reload();
     });
 };
 getCart();
-emptyCart();

@@ -1,0 +1,23 @@
+.card{
+    width: 100%;
+    display: flex;
+    background-color: $background-light;
+    margin: 20px 0;
+    padding: 20px 0px;
+    flex-wrap: wrap;
+    img{
+        width: 30%;
+        height: 100%;
+        margin-left: 10px;
+    }
+    &__text{
+        margin: 0 auto;
+        h3{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    }
+}
+.backgroundAlt{
+    background-color: $background-lightAlt;
+}

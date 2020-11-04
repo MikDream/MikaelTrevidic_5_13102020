@@ -3,6 +3,9 @@
     padding: 0;
     font-family: $text-font-family;
 }
+button, select, option, input{
+    font-size: 1rem;
+}
 .main-block{
     width: 100%;
 }

@@ -1,0 +1,27 @@
+.button{
+    box-shadow: $shadow;
+    color: $primary-color;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid $secondary-color;
+    padding: 5px 15px;
+    background-color: white;
+    &:hover{
+        cursor: pointer;
+        box-shadow: none;
+        border-color: white;
+        color: white;
+        background-color: $primary-color;
+    }
+}
+#addCart{
+    margin-top: 20px;
+}
+#lessArticle{
+    margin-right: 20px;
+    padding: 0 5px;
+}
+#moreArticle{
+    margin-left: 20px;
+    padding: 0 5px;
+}

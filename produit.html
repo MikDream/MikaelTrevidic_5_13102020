@@ -21,15 +21,20 @@
         <section class="product">
             <img src="">
             <h1></h1>
-            <p class="descriptionProduit"></p>
-            <label for="colors-select">Choisissez une couleur :</label>
-            <select name="colors" id="colors-select"></select>
-            <p class="prixProduit">Prix : </p>
-            <button id="lessArticle">-</button>
-            <input id="numberOfArticle" type="number" value="1">
-            <button id="moreArticle">+</button>
-            <input id="addCart" type="button" value="Ajouter au panier">
-            
+            <div class="product__infos">
+                <p class="descriptionProduit"></p>
+                <div class="product--colors">
+                    <label for="colors-select">Choisissez une couleur :</label>
+                    <select name="colors" id="colors-select"></select>
+                </div>
+                <div class="product--addCart">
+                    <button id="lessArticle" class="button">-</button>
+                    <input id="numberOfArticle" type="number" value="1" aria-disabled="true" disabled>
+                    <button id="moreArticle" class="button">+</button><br>
+                    <input id="addCart" class="button" type="button" value="Ajouter au panier">
+                </div>
+                <p class="product--price">Prix unitaire : </p>
+            </div>
         </section>
         <footer class="footer">
             <h5>Orinoco</h5>

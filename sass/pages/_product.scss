@@ -1,0 +1,30 @@
+.product{
+    & img{
+        width: 100%;
+    }
+    & h1{
+        text-align: center;
+    }
+    &__infos{
+        margin-top: 20px;
+        padding: 0 20px;
+        font-weight: bold;
+    }
+    &--colors{
+        padding: 40px 0;
+    }
+    &--price{
+        padding: 40px 0 20px 0;
+        text-align: end;
+    }
+    &--addCart{
+        text-align: center;
+    }
+    #numberOfArticle:disabled{
+        color: black;
+        text-align: center;
+        border: 1px solid $secondary-color;
+        font-weight: bold;
+        width: 40px;
+    }
+}
