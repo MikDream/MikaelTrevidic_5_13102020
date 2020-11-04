@@ -21,8 +21,16 @@ let sameArticle = function(array){
         };
     };
 };
+let totalCommande = function(panier, quantite){
+    let cartBlock = document.querySelector('.panier');
+    let total = document.createElement('p');
+    total.textContent = "Vous avez "+quantite+" article(s) dans votre panier, pour un total de "+formatPrix(panier)+"€";
+    cartBlock.appendChild(total);
+};
 let vueCart = function(cart){
     let x = 0;
+    let prixTotalPanier = 0;
+    let quantiteTotale = 0;
     for(let i=0; i<cart.length; i++){
         let cartBlock = document.querySelector('.panier');
         let article = document.createElement('div');
@@ -31,7 +39,9 @@ let vueCart = function(cart){
         let nomArticle = document.createElement('h3');
         let quantite = document.createElement('p');
         let prix = document.createElement('p');
-        let prixTotal = document.createElement('p');
+        let prixTotalArticle = document.createElement('p');
+        prixTotalPanier += (cart[i].prix*cart[i].quantite);
+        quantiteTotale += cart[i].quantite;
         article.setAttribute("class", "card");
         if (x == i) {
             article.setAttribute("class", "card backgroundAlt");
@@ -42,12 +52,13 @@ let vueCart = function(cart){
         text.setAttribute("class", "card__text");
         nomArticle.textContent = cart[i].nom;
         quantite.textContent = "Quantité : "+cart[i].quantite;
-        prix.textContent = "Prix unitaire : "+cart[i].prix+"€";
-        prixTotal.textContent = "Prix total : "+(cart[i].prix*cart[i].quantite)+"€";
-        text.append(nomArticle, quantite, prix, prixTotal);
+        prix.textContent = "Prix unitaire : "+formatPrix(cart[i].prix)+"€";
+        prixTotalArticle.textContent = "Prix total : "+formatPrix((cart[i].prix*cart[i].quantite))+"€";
+        text.append(nomArticle, quantite, prix, prixTotalArticle);
         article.append(img, text);
         cartBlock.appendChild(article);
     };
+    totalCommande(prixTotalPanier, quantiteTotale);
 };
 let getCart = function(){
     var cartArray_json = localStorage.getItem("panier");
@@ -68,8 +79,7 @@ let getCart = function(){
         cartMessage.appendChild(numArticle);
         vueCart(cartArray);
         emptyCart();
-        console.log(cartArray[0]);
-        
+        commander();
     };
 };
 let emptyCart = function(){
@@ -84,5 +94,22 @@ let emptyCart = function(){
         localStorage.clear();
         location.reload();
     });
+};
+let commander = function(){
+    let parentBlock = document.querySelector('.panier');
+    let btnCommander = document.createElement('input');
+    btnCommander.setAttribute('id', 'commander');
+    btnCommander.setAttribute('class', 'button');
+    btnCommander.setAttribute('type', 'button');
+    btnCommander.setAttribute('value', 'Passer la commande');
+    parentBlock.appendChild(btnCommander);
+    document.querySelector('#commander').addEventListener('click', function(){
+        document.querySelector('#shipment').style.display = "flex";
+    });
+};
+let formatPrix = function(prix){
+    let resultat = prix / 100;
+    new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);
+    return resultat;
 };
 getCart();

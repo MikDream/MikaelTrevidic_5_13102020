@@ -33,7 +33,7 @@ let afficherProduit = function(produit){
     let descriptionProduit = document.querySelector('.descriptionProduit');
     descriptionProduit.textContent = produit.description;  //Création description
     let prixProduit = document.querySelector('.product--price');
-    prixProduit.insertAdjacentText('beforeend', produit.price+'€');//Création prix
+    prixProduit.insertAdjacentText('beforeend', formatPrix(produit.price)+'€');//Création prix
     produit.colors.forEach(color => {
         var select = document.querySelector('#colors-select');
         var option = document.createElement('option');
@@ -43,11 +43,16 @@ let afficherProduit = function(produit){
 };
 let numberOfSameToCart = function(){
     let quantite = 1;
-    document.querySelector('#moreArticle').addEventListener('click', function(){
+    document.querySelector('#moreArticle').addEventListener('click', function(e){
+        document.querySelector('#lessArticle').removeAttribute('disabled');
         quantite++;
         document.querySelector('#numberOfArticle').setAttribute('value', quantite);
     });
     document.querySelector('#lessArticle').addEventListener('click', function(){
+        if(quantite!=1 && quantite > 0)
+            document.querySelector('#lessArticle').removeAttribute('disabled');
+            else
+            document.querySelector('#lessArticle').setAttribute('disabled', true);
         quantite--;
         document.querySelector('#numberOfArticle').setAttribute('value', quantite);
     });
@@ -55,7 +60,7 @@ let numberOfSameToCart = function(){
 // Fonction d'ajout au localStorage
 let addCart = function(article){
     numberOfSameToCart();
-    document.querySelector('#addCart').addEventListener('click', function(){
+    document.querySelector('#addCart').addEventListener('click' ,function(){
         let value = document.querySelector('#numberOfArticle');
         let quantite = value.getAttribute('value');
         for(let i=1; i<=quantite; i++){
@@ -96,4 +101,9 @@ let countCart = function(){
     numberArt++;
     localStorage.setItem("number", (numberArt).toString(10));
     compteurPanier();
+};
+let formatPrix = function(prix){
+    let resultat = prix / 100;
+    new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);
+    return resultat;
 };

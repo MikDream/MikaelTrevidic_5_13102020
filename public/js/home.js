@@ -27,7 +27,7 @@ let createCard = function(produit, i, blocParent){
     image.setAttribute('alt', 'image de '+produit[i].name);
     text.setAttribute('class', 'card__text');
     name.textContent = produit[i].name;
-    price.textContent = 'Prix : '+produit[i].price+'€';
+    price.textContent = 'Prix : '+formatPrix(produit[i].price)+'€';
     text.append(name, price);
     card.append(image, text);
     link.appendChild(card);
@@ -39,4 +39,9 @@ let productsInfos = function(produits){
     for(let i = 0; i < lenghtArrayProduit; i++){
         createCard(produits, i, blocNomsProduits);
     };
+};
+let formatPrix = function(prix){
+    let resultat = prix / 100;
+    new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);
+    return resultat;
 };

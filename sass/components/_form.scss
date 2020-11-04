@@ -1,0 +1,25 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .formGroup{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        @include medium-size{
+            margin: 0 10px;
+        }
+    }
+    .name, .adress, .contact{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        @include medium-size{
+            flex-direction: row;
+            margin: 20px 0;
+        }
+    }
+}
+#shipment{
+    display: none;
+}
