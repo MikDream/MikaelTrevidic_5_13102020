@@ -22,25 +22,29 @@
             <h1>Votre panier</h1>
         </section>
         <section class="formulaire">
-            <form id="shipment" class="form">
+            <form id="orderInfos" class="form" action="#">
                 <div class="name">
                     <div class="formGroup">
-                        <label for="nom">Votre nom</label>
-                        <input id="nom" type="text" placeholder="Dupont">
+                        <label for="nom">Votre nom <span class="required">*</span></label>
+                        <input id="nom" type="text" placeholder="Dupont" required>
                     </div>
                     <div class="formGroup">
-                        <label for="prenom">Votre prénom</label>
-                        <input id="prenom" type="text" placeholder="Jean">
+                        <label for="prenom">Votre prénom <span class="required">*</span></label>
+                        <input id="prenom" type="text" placeholder="Jean" required>
                     </div>
                 </div>
                 <div class="adress">
                     <div class="formGroup">
-                        <label for="adresse">Votre adresse</label>
-                        <input id="adresse" type="text" placeholder="13 rue dubois">
+                        <label for="adresse">Votre adresse <span class="required">*</span></label>
+                        <input id="adresse" type="text" placeholder="13 rue dubois" required>
                     </div>
                     <div class="formGroup">
-                        <label for="CP">Code postale</label>
-                        <input id="CP" type="number" placeholder="64570">
+                        <label for="ville">Ville <span class="required">*</span></label>
+                        <input id="ville" type="text" placeholder="Paris" required>
+                    </div>
+                    <div class="formGroup">
+                        <label for="CP">Code postale <span class="required">*</span></label>
+                        <input id="CP" type="number" placeholder="64000" required>
                     </div>
                 </div>
                 <div class="contact">
@@ -49,10 +53,12 @@
                         <input id="telephone" type="tel" placeholder="05xxxxxxxx">
                     </div>
                     <div class="formGroup">
-                        <label for="email">Votre email</label>
-                        <input id="email" type="email" placeholder="monmail@email.com">
+                        <label for="email">Votre email <span class="required">*</span></label>
+                        <input id="email" type="email" placeholder="monmail@email.com" required>
                     </div>
                 </div>
+                <small class="required">* Ces informations sont requises</small>
+                <input id="buy" class="button" type="submit" value="Commander">
             </form>
         </section>
         <footer class="footer">

@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    .required{
+        color: rgb(192, 6, 6);
+        font-style: italic;
+    }
     .formGroup{
         display: flex;
         flex-direction: column;
@@ -19,7 +25,13 @@
             margin: 20px 0;
         }
     }
-}
-#shipment{
-    display: none;
+    .formGroup input{
+        border: 1px solid rgba(0, 0, 0, 0.562);
+        &:focus{
+            border-color: $secondary-color;
+        }
+    }
+    #buy{
+        margin-top: 10px;
+    }
 }

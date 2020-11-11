@@ -3,12 +3,10 @@ let sameArticle = function(array){
     array.sort((a, b) => {
         let fa = a.nom.toLowerCase(),
             fb = b.nom.toLowerCase();
-        if(fa<fb){
+        if(fa<fb)
             return -1;
-        }
-        if(fa>fb){
+        if(fa>fb)
             return 1;
-        }
         return 0;
     });
     for(i = 1; i < array.length; i++){
@@ -24,7 +22,8 @@ let sameArticle = function(array){
 let totalCommande = function(panier, quantite){
     let cartBlock = document.querySelector('.panier');
     let total = document.createElement('p');
-    total.textContent = "Vous avez "+quantite+" article(s) dans votre panier, pour un total de "+formatPrix(panier)+"€";
+    total.style.padding = "0 10px";
+    total.textContent = "Montant total de votre commande : "+formatPrix(panier)+"€";
     cartBlock.appendChild(total);
 };
 let vueCart = function(cart){
@@ -61,7 +60,7 @@ let vueCart = function(cart){
     totalCommande(prixTotalPanier, quantiteTotale);
 };
 let getCart = function(){
-    var cartArray_json = localStorage.getItem("panier");
+    let cartArray_json = localStorage.getItem("panier");
     let cartArray = [];
     if(cartArray_json == null){
         let emptyMessage = document.querySelector('.panier');
@@ -79,7 +78,8 @@ let getCart = function(){
         cartMessage.appendChild(numArticle);
         vueCart(cartArray);
         emptyCart();
-        commander();
+        displayForm();
+        infosOrder();
     };
 };
 let emptyCart = function(){
@@ -95,7 +95,7 @@ let emptyCart = function(){
         location.reload();
     });
 };
-let commander = function(){
+let displayForm = function(){
     let parentBlock = document.querySelector('.panier');
     let btnCommander = document.createElement('input');
     btnCommander.setAttribute('id', 'commander');
@@ -104,12 +104,71 @@ let commander = function(){
     btnCommander.setAttribute('value', 'Passer la commande');
     parentBlock.appendChild(btnCommander);
     document.querySelector('#commander').addEventListener('click', function(){
-        document.querySelector('#shipment').style.display = "flex";
+        document.querySelector('#orderInfos').style.display = "flex";
     });
 };
 let formatPrix = function(prix){
     let resultat = prix / 100;
     new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);
     return resultat;
+};
+function Contact(prenom, nom, adresse, ville, mail){
+    this.firstName = prenom;
+    this.lastName = nom;
+    this.address = adresse;
+    this.city = ville;
+    this.email = mail;
+};
+let infosOrder = function(){
+    document.querySelector('#orderInfos').addEventListener('submit', function(e){
+        e.preventDefault();
+        let firstName = document.querySelector('#prenom').value;
+        let lastName = document.querySelector('#nom').value;
+        let address = document.querySelector('#adresse').value;
+        let city = document.querySelector('#ville').value;
+        let mail = document.querySelector('#email').value;
+        let contact= new Contact(firstName, lastName, address, city, mail);
+        let products = [];
+        let price = 0;
+        let itemsJson = localStorage.getItem("panier");
+        let items = JSON.parse(itemsJson);
+        for(let i = 0; i<items.length; i++){
+            products.push(items[i].id);
+            price += items[i].prix;
+        };
+        let order = {contact, products};
+        let orders = JSON.stringify(order);
+        console.log(orders);
+        let request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:3000/api/teddies/order");
+        request.setRequestHeader("Content-Type", "application/json");
+        request.onreadystatechange = function(){
+            if(request.readyState === 4){
+                if(request.status === 201){
+                console.log("OK")
+                let res = request.responseText;
+                res = JSON.parse(res);
+                let orderID = res.orderId;
+                localStorage.clear();
+                price = JSON.stringify(price);
+                localStorage.setItem('orderId', orderID);
+                localStorage.setItem('price', price);
+                var pathUrlArray = window.location.pathname.split( "/" );
+                pathUrlArray.pop();
+                pathUrlArray.push('confirm.html');
+                var redirectPath = "";
+                for(i=0; i<pathUrlArray.length; i++){
+                    redirectPath += "/";
+                    redirectPath += pathUrlArray[i];
+                }
+                window.location.pathname=redirectPath;
+                }
+                else{
+                    console.log(request);
+                }        
+            };
+        };
+        request.send(orders);
+    });
 };
 getCart();
