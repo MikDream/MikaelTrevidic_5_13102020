@@ -79,7 +79,6 @@ let getCart = function(){
         vueCart(cartArray);
         emptyCart();
         displayForm();
-        infosOrder();
     };
 };
 let emptyCart = function(){
@@ -119,56 +118,96 @@ function Contact(prenom, nom, adresse, ville, mail){
     this.city = ville;
     this.email = mail;
 };
-let infosOrder = function(){
-    document.querySelector('#orderInfos').addEventListener('submit', function(e){
-        e.preventDefault();
-        let firstName = document.querySelector('#prenom').value;
-        let lastName = document.querySelector('#nom').value;
-        let address = document.querySelector('#adresse').value;
-        let city = document.querySelector('#ville').value;
-        let mail = document.querySelector('#email').value;
-        let contact= new Contact(firstName, lastName, address, city, mail);
-        let products = [];
-        let price = 0;
-        let itemsJson = localStorage.getItem("panier");
-        let items = JSON.parse(itemsJson);
-        for(let i = 0; i<items.length; i++){
-            products.push(items[i].id);
-            price += items[i].prix;
-        };
-        let order = {contact, products};
-        let orders = JSON.stringify(order);
-        console.log(orders);
-        let request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:3000/api/teddies/order");
-        request.setRequestHeader("Content-Type", "application/json");
-        request.onreadystatechange = function(){
-            if(request.readyState === 4){
-                if(request.status === 201){
-                console.log("OK")
-                let res = request.responseText;
-                res = JSON.parse(res);
-                let orderID = res.orderId;
-                localStorage.clear();
-                price = JSON.stringify(price);
-                localStorage.setItem('orderId', orderID);
-                localStorage.setItem('price', price);
-                var pathUrlArray = window.location.pathname.split( "/" );
-                pathUrlArray.pop();
-                pathUrlArray.push('confirm.html');
-                var redirectPath = "";
-                for(i=0; i<pathUrlArray.length; i++){
-                    redirectPath += "/";
-                    redirectPath += pathUrlArray[i];
-                }
-                window.location.pathname=redirectPath;
-                }
-                else{
-                    console.log(request);
-                }        
-            };
-        };
-        request.send(orders);
-    });
+let sanityzeForm = function(string){
+    let nonValid = /([^\wëéè\-ÉÈ])|([_])/gm;
+    let suppress ='';
+    let newString = string.replace(nonValid, suppress);
+    return newString;
 };
+var validMail = function(email){
+    return /^([^\s@]{2,})+@([^\s@]{2,})+(\.{1})+([a-z]|[0-9]{0,})+[^\s@]+$/.test(email);
+};
+let testInput = function(input){
+    let inputElement = input;
+    let textError = "";
+    input = sanityzeForm(input.value);
+    if(/[^ ]{2,}/g.test(input))
+        return input;
+    else
+        textError = document.createElement('small');
+        textError.setAttribute('class', 'error');
+        let labelForError = document.querySelector("label[for="+inputElement.id+"]");
+        labelForError = labelForError.getAttribute('name');
+        textError.textContent = "Le format de votre "+labelForError+" n'est pas valide !";
+        inputElement.after(textError);
+        return false;
+}
+document.querySelector('#orderInfos').addEventListener('submit', function(e){
+    let mail = document.querySelector('#email');
+    if(validMail(mail.value)){
+        let firstName = testInput(document.querySelector('#prenom'));
+        let lastName = testInput(document.querySelector('#nom'));
+        let address = testInput(document.querySelector('#adresse'));
+        let city = testInput(document.querySelector('#ville'));
+        if(firstName != false && lastName != false && address != false && city != false){
+            let contact= new Contact(firstName, lastName, address, city, mail.value);
+            console.log(contact);
+        }else
+            e.preventDefault();
+    }else{
+        e.preventDefault();
+        let mailError = document.createElement('small');
+        mailError.setAttribute('class', 'error');
+        let labelForMailError = document.querySelector("label[for="+mail.id+"]");
+        labelForMailError = labelForMailError.getAttribute('name');
+        mailError.textContent = "Votre "+labelForMailError+" n'est pas valide !";
+        mail.after(mailError);
+    }
+})
+
+
+//         let contact= new Contact(firstName, lastName, address, city, mail);
+//         let products = [];
+//         let price = 0;
+//         let itemsJson = localStorage.getItem("panier");
+//         let items = JSON.parse(itemsJson);
+//         for(let i = 0; i<items.length; i++){
+//             products.push(items[i].id);
+//             price += items[i].prix;
+//         };
+//         let order = {contact, products};
+//         let orders = JSON.stringify(order);
+//         console.log(orders);
+//         let request = new XMLHttpRequest();
+//         request.open("POST", "http://localhost:3000/api/teddies/order");
+//         request.setRequestHeader("Content-Type", "application/json");
+//         request.onreadystatechange = function(){
+//             if(request.readyState === 4){
+//                 if(request.status === 201){
+//                 console.log("OK")
+//                 let res = request.responseText;
+//                 res = JSON.parse(res);
+//                 let orderID = res.orderId;
+//                 localStorage.clear();
+//                 price = JSON.stringify(price);
+//                 localStorage.setItem('orderId', orderID);
+//                 localStorage.setItem('price', price);
+//                 var pathUrlArray = window.location.pathname.split( "/" );
+//                 pathUrlArray.pop();
+//                 pathUrlArray.push('confirm.html');
+//                 var redirectPath = "";
+//                 for(i=0; i<pathUrlArray.length; i++){
+//                     redirectPath += "/";
+//                     redirectPath += pathUrlArray[i];
+//                 }
+//                 window.location.pathname=redirectPath;
+//                 }
+//                 else{
+//                     console.log(request);
+//                 }        
+//             };
+//         };
+//         request.send(orders);
+//     });
+// };
 getCart();

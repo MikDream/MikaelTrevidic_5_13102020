@@ -4,6 +4,10 @@
     @include medium-size{
         text-align: center;
     }
+    .important{
+        color: rgb(192, 6, 6);
+        font-style: italic;
+    }
     h1{
         margin-bottom: 20px;
     }

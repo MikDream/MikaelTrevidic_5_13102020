@@ -7,8 +7,8 @@ let confirmText = function(){
     let test = document.querySelector('.confirm__text > p');
     let orderId = document.createElement('p');
     let orderPrice = document.createElement('p');
-    orderId.innerText = 'Votre commande porte le numéro : '+orderID;
-    orderPrice.innerText = 'Le prix total de votre commande est de : '+formatPrix(price)+'€';
+    orderId.innerHTML = "Votre commande porte le numéro : <span class='important'>"+orderID+"</span>";
+    orderPrice.innerHTML = "Le prix total de votre commande est de : <span class='important'>"+formatPrix(price)+"€</span>";
     confirm.insertBefore(orderId, test);
     confirm.insertBefore(orderPrice, test);
 }
