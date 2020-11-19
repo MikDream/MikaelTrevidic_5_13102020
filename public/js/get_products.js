@@ -18,6 +18,7 @@ let get = function(url){
 let catchError = function(error){
     console.error('Erreur AJAX', error);
 };
+//Affichage du nombre d'article dans le panier
 let compteurPanier = function(){
     let compteur = localStorage.getItem("number");
     if(compteur == null)

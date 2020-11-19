@@ -102,6 +102,7 @@ let countCart = function(){
     localStorage.setItem("number", (numberArt).toString(10));
     compteurPanier();
 };
+//Fonction de formatage du prix
 let formatPrix = function(prix){
     let resultat = prix / 100;
     new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);

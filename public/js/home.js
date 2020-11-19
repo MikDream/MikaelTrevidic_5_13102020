@@ -4,6 +4,7 @@ get('http://localhost:3000/api/teddies').then(function(response){
     productsInfos(produits);
     compteurPanier();
 }).catch(catchError);
+// Affichage du produit à la une
 let productsFirst = function(produit){
     let imageProduit = document.createElement('img');
     let nomProduit = document.createElement('a');
@@ -14,6 +15,7 @@ let productsFirst = function(produit){
     nomProduit.innerHTML = '<h3>'+produit[3].name+'</h3>';
     document.querySelector('.aLaUne__image').append(imageProduit, nomProduit);
 };
+//Création de chaque carte de produits
 let createCard = function(produit, i, blocParent){
     let link = document.createElement('a');
     let card = document.createElement('li');
@@ -33,6 +35,7 @@ let createCard = function(produit, i, blocParent){
     link.appendChild(card);
     blocParent.appendChild(link);
 };
+// Affichage des produits
 let productsInfos = function(produits){
     let lenghtArrayProduit = produits.length;
     let blocNomsProduits = document.querySelector('#products-list');
@@ -40,6 +43,7 @@ let productsInfos = function(produits){
         createCard(produits, i, blocNomsProduits);
     };
 };
+//Fonction de formatage du prix
 let formatPrix = function(prix){
     let resultat = prix / 100;
     new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);

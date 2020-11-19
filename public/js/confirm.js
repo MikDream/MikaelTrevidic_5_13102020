@@ -1,7 +1,6 @@
-let orderID = localStorage.getItem('orderId');
-let price = localStorage.getItem('price');
-console.log(orderID);
-console.log(price);
+let orderID = localStorage.getItem('orderId'); // récupération de l'ID renvoyé par le serveur
+let price = localStorage.getItem('price');// récupération du prix de la commande
+//Fonction de création du message de confirmation
 let confirmText = function(){
     let confirm = document.querySelector('.confirm__text');
     let test = document.querySelector('.confirm__text > p');
@@ -12,6 +11,7 @@ let confirmText = function(){
     confirm.insertBefore(orderId, test);
     confirm.insertBefore(orderPrice, test);
 }
+//Fonction de formatage du prix
 let formatPrix = function(prix){
     let resultat = prix / 100;
     new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(resultat);
