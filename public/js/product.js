@@ -4,10 +4,25 @@ urlProduit = (urlProduit.searchParams.get("id"));
 if(urlProduit){// si un id est détécté dans l'url, appel des fonctions d'affichage du produit
     get('http://localhost:3000/api/teddies/'+urlProduit).then(function(response){
         let produit = JSON.parse(response);
-        afficherProduit(produit); // affichage du produit
-        addCart(produit); // ajout au localStorage
-        compteurPanier(); 
-    }).catch(catchError);
+        return produit;
+    }).catch(catchError)
+    .then(function(produit){
+        try{
+            afficherProduit(produit); // affichage du produit
+        }catch(err){
+            catchErrorFunc(err);
+        }
+        return get('http://localhost:3000/api/teddies/'+urlProduit);
+    })
+    .then(function(response){
+        let produit = JSON.parse(response);
+        try{
+            addCart(produit); // ajout au localStorage
+        }catch(err){
+            catchErrorFunc(err);
+        }
+    });
+    compteurPanier();
 }else{ // si aucun id n'est présent dans l'url, redirection sur page index.html
     var pathUrlArray = window.location.pathname.split( "/" );
     var pageUrl = pathUrlArray[pathUrlArray.length - 1];

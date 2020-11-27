@@ -16,7 +16,13 @@ let get = function(url){
 };
 // En cas d'erreur
 let catchError = function(error){
-    console.error('Erreur AJAX', error);
+    console.error('Erreur de connexion', error);
+    window.alert("Un problème est survenu. Veuillez réessayer ultérieurement ou contacter un administrateur.");
+};
+let catchErrorFunc = function(error){
+    console.error(error.name);
+    console.error(error.message);
+    console.error(error.stack);
 };
 //Affichage du nombre d'article dans le panier
 let compteurPanier = function(){

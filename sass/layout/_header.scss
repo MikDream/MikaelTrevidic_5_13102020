@@ -1,9 +1,18 @@
 .header{
     background-color: lighten($color: $secondary-color, $amount: 37%);
+    @include medium-size{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 30px;
+    }
     &__logo{
-        width: 100%;
+        max-width: 100%;
+        max-height: 190px;
         box-shadow: $shadow;
         position: relative;
+        @include medium-size{
+            box-shadow: none;
+        }
     }
     &__nav{
         display: flex;
@@ -12,6 +21,11 @@
         padding: 9% 0;
         font-weight: bold;
         font-size: 1.1rem;
+        @include medium-size{
+            padding: 5% 0;
+            flex-grow: 1;
+            justify-content: space-evenly;
+        }
         a{
             padding-bottom: 12px;
         }

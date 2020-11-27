@@ -1,9 +1,24 @@
 get('http://localhost:3000/api/teddies').then(function(response){
     let produits = JSON.parse(response);
-    productsFirst(produits);
-    productsInfos(produits);
-    compteurPanier();
-}).catch(catchError);
+    return produits;
+}).catch(catchError)
+.then(function(produits){
+    try{
+        productsFirst(produits);
+    }catch(err){
+        catchErrorFunc(err);
+    }
+    return get('http://localhost:3000/api/teddies');  
+})
+.then(function(response){
+    let produits = JSON.parse(response);
+    try{
+        productsInfos(produits);
+    }catch(err){
+        catchErrorFunc(err);
+    }
+});
+compteurPanier();
 // Affichage du produit à la une
 let productsFirst = function(produit){
     let imageProduit = document.createElement('img');

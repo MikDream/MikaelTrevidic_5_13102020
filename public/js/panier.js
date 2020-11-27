@@ -134,7 +134,7 @@ function Contact(prenom, nom, adresse, ville, mail){
 };
 //Fonction pour assainir les infos entrées par l'utilisateur
 let sanityzeForm = function(string){
-    let nonValid = /([^\wëéè\-ÉÈ])|([_])/gm;
+    let nonValid = /([^\wëéèï\-ÉÈ])|([_])/gm;
     let suppress ='';
     let newString = string.replace(nonValid, suppress);
     return newString;

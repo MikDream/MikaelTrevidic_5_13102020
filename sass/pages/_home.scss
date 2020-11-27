@@ -1,5 +1,9 @@
 .aLaUne{
     margin: 0px 0;
+    &__image{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
     h2{
         @include h2-title;
     }
@@ -41,7 +45,8 @@
         }
     }
     &__list{
-        margin-top: 30px;
+        max-width: 800px;
+        margin: 30px auto 0 auto;
         font-weight: bold;
         padding: 0 20px;
         #products-list{
